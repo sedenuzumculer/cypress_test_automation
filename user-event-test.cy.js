@@ -14,10 +14,9 @@ describe('Shopping Cart Test', () => {
       cy.log(cy.location('pathname'));
       
       cy.location('hash').should('eq', '#/shop');
-      cy.get('.product').should('have.length', 20);
+      cy.get('.product').should('have.length', 20);//20 tane ürün varlığını doğrulama
+        //ürünlerde eksiltme ve arttırma yaparak buton çalışmasının kontrolünü sağlama
       cy.get(':nth-child(2) > .priceRow > button').click()
-
-      
       cy.get('.product').first().then(($product) => {
     
 
@@ -27,11 +26,11 @@ describe('Shopping Cart Test', () => {
       cy.get('.product').first().find('.priceRow .quantityButtons :nth-child(1)').click();
       
       cy.get('.product').first().find('.priceRow .quantityButtons :nth-child(3)').click();
+
+        //indexin içindeki yazıyı alıp daha sonrasında 1. değerle aynı mı diye düzenleme
       let initialQuantityIndex;
 
-    cy.get('.product').first().find('.quantity').then(($quantityElement) => {
-    
-    });
+  
 
       cy.get('.product').first().find('.quantity').then(($quantityElement) => {
         initialQuantityIndex = $quantityElement.index(); // Indexi al
@@ -40,10 +39,11 @@ describe('Shopping Cart Test', () => {
       });
       
         });
+        //oluşturulan fake user tarafından kullanıcının ödeme yapma ya da sepeti boşaltma işlemlerinin yapılması
         cy.get('.ShoppingBag').click();  
         cy.window().then((win) => {
             const userChoice = win.prompt('Ne yapmak istersiniz?', 'Ödeme Yap/Sepeti Boşalt');
-             // 2. Kullanıcının Seçimine Göre İşlem Yapma
+        // 2. Kullanıcının Seçimine Göre İşlem Yapma
       if (userChoice === 'Ödeme Yap') {
         cy.get('.priceChart > button').click();
         cy.get('.thankyou').should('be.visible').and('contain', 'You made a fake purchase! Thank you!');

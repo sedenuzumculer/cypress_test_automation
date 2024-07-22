@@ -9,7 +9,6 @@ describe('ThemeSwitch', () => {
     localStorage.clear();
   });
   
-
   test('başlangıçta doğru temayı yükler ve uygular', () => {
     localStorage.setItem('AppBahaTheme', 'dark'); 
 
@@ -30,6 +29,7 @@ describe('ThemeSwitch', () => {
     expect(localStorage.getItem('AppBahaTheme')).toBe('dark'); 
     expect(document.documentElement).toHaveClass('dark'); 
   });
+
 
 
 
